@@ -1,0 +1,12 @@
+<h2>START SEITE</h2>
+<P>heute ist {{heute}}</P>
+
+<ul>
+    {{#each jobs}}
+    <li> {{position}} bei {{firma}} von:{{von}} bis:{{bis}}</li>
+    {{/each}}
+</ul>
+
+{{#if fehler}}
+<p>Es ist was schief gegangen:{{fehler}}</p>
+{{/if}}
