@@ -1,7 +1,7 @@
-const {jobModell}= require("../modells/job-modell");
+const { jobModell }= require("../modells/job-modell");
 
+// GET *************************************
 const jobGetController = (req, res, next) => {
-
     if(req.cookies.nutzerCookie){
         let token=req.cookies.nutzerCookie
         let tokenlesbar=jwt.verify(token,process.env.JWT || 'geheimniss')
@@ -13,6 +13,7 @@ const jobGetController = (req, res, next) => {
     }
 };
 
+// POST ***************************************
 const jobPostController = (req, res, next) => {
 
     console.log(req.body);
