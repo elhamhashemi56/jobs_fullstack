@@ -3,15 +3,7 @@ const jwt = require('jsonwebtoken')
 
 // GET *************************************
 const jobGetController = (req, res, next) => {
-    if(req.cookies.nutzerCookie){
-        let token=req.cookies.nutzerCookie
-        let tokenlesbar=jwt.verify(token,process.env.JWT || 'geheimniss')
-        if(tokenlesbar.nutzername){
-            res.status(200).render('neuposition')
-        }
-    }else{
-        res.status(400).render('nichteingeloggt')
-    }
+    res.status(200).render('neuposition')
 };
 
 // POST ***************************************

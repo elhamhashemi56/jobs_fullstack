@@ -7,7 +7,7 @@ const userSchema=new mongoose.Schema({
     wohnort:String,
     beruf:String,
     email:String,
-    passwort:String
+    password:String
 })
 
 const  userModell= mongoose.model('user', userSchema ,'users') ;
