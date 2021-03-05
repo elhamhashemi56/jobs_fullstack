@@ -1,4 +1,5 @@
 const { jobModell }= require("../modells/job-modell");
+const jwt = require('jsonwebtoken')
 
 // GET *************************************
 const jobGetController = (req, res, next) => {

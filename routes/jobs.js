@@ -3,7 +3,7 @@ const router = express.Router()
 
 const { jobGetController,jobPostController } = require('../controller/job_controller')
 
-router.route('/jobs')
+router.route('/')
   .get(jobGetController)
   .post(jobPostController)
 
