@@ -1,0 +1,27 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.welcome{
+    background-color: sandybrown;
+    text-align: center;
+}
+
+.navbar_class{
+    display: flex;
+    background-color: rgb(37, 36, 36);
+}
+
+.navbar_items{
+    margin: 15px;
+}
+
+.navbar_items a{
+    text-decoration: none;
+    color: white;
+}
+
+.navbar_items a:hover{
+    color:sandybrown;
+}
