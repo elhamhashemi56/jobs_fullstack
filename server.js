@@ -28,7 +28,6 @@ app.use('/', mainRouter);
 app.use('/jobs', jobsRouter);
 app.use('/users', usersRouter);
 app.use(express.static('public'))
-app.use(express.static('../../public'))
 
 
 // LOG OUT ************************
