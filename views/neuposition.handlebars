@@ -1,28 +1,28 @@
 
-
 <div class="container mt-5">
-        <form action="#" method="POST">
+        <form action="/jobs" method="POST">
             <div class="form-group col-md-6">
+                <input type="text" name="_csrf" value="{{csrfTocken}}">
                 <label for="firma"></label>
-                <input type="text" class="form-control" id="firma" name="firma" placeholder="Firma">
+                <input type="text" class="form-control" id="firma" name="firma" placeholder="Firma" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="position"></label>
-                <input type="text" class="form-control" id="position" name="position" placeholder="Position">
+                <input type="text" class="form-control" id="position" name="position" placeholder="Position" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="von"></label>
-                <input type="text" class="form-control" id="von" name="von" placeholder="Von">
+                <input type="date" class="form-control" id="von" name="von" placeholder="Von" required>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="bis"></label>
-                <input type="text" class="form-control" id="bis" name="bis" placeholder="Bis">
+                <input type="date" class="form-control" id="bis" name="bis" placeholder="Bis" required>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+            <button type="submit" class="btn btn-primary mt-3">Send</button>
             <button type="reset" class="btn btn-primary mt-3">Reset</button>
         </form>
     </div>

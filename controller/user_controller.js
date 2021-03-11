@@ -1,44 +1,100 @@
 const { userModell }= require("../modells/user-modell");
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const validator = require('express-validator');
 
 
 
 //USER GET *************************************
 const userGetController = (req, res, next) => {
-    res.status(200).render('anmelden')
+    res.status(200).render('anmelden',{csrfTocken:req.csrfToken()})
 };
 
 //USER POST ***************************************
 const userPostController = async(req, res, next) => {
 
+    // try {
+    //     const neueDaten = req.body     
+    //     let schonVorhandenUser = await userModell.find({ email: neueDaten.email })
+	// 	if (schonVorhandenUser.length >= 1) {
+	// 		return res.status(409).send('Es gib schon einen Nutzer mit dieser Email')
+	// 	}
+
+	// 	let passwortGehashed = await bcrypt.hash(neueDaten.password, 10)
+    //     let erstelleNutzer = await userModell.create({ ...neueDaten, bild: req.file.filename, password: passwortGehashed })
+	// 	res.status(201).render('angemeldet',{name: erstelleNutzer.name, email: erstelleNutzer.email,bild: "/" + erstelleNutzer.bild});
+
+    // } catch (fehler) {
+    //     // next(fehler)
+    //     res.render('fehler',fehler)
+    // }
+//----------------------------------------------------------------------
+//     try {
+//         const neueDaten = {
+//             vorname: req.body.vorname,
+//             password: req.body.password,
+//             email: req.body.email,
+//         };
+//         const fehler = validator.validationResult(req);
+//         if (!fehler.isEmpty()) {
+//             console.log(fehler.array());
+//             const meldungen = fehler.array().map((einPrüfergebnis) => {
+//                 return einPrüfergebnis.msg;
+//             })
+//             console.log('meldungen',meldungen);
+//             neueDaten.fehler = meldungen;
+//             console.log('meldungen',meldungen);
+//             res.render('anmeldenserverout',{csrfTocken:req.csrfToken()},neueDaten);
+//         }
+       
+//         let schonVorhandenUser = await userModell.find({ email: neueDaten.email })
+//         if (schonVorhandenUser.length >= 1) {
+//             return res.status(409).send('Es gib schon einen Nutzer mit dieser Email')
+//         }
+//         let passwortGehashed = await bcrypt.hash(neueDaten.password, 10)
+//         let erstelleNutzer = await userModell.create({ ...neueDaten, bild: req.file.filename, password: passwortGehashed })
+//         res.status(201).render('angemeldet', { vorname: erstelleNutzer.vorname, email: erstelleNutzer.email, bild: "/" + erstelleNutzer.bild });
+//     } catch (fehler) {
+//         console.log("fehler=", fehler)
+//         res.render('fehler', fehler)
+//     }
+// }
+//------------------------------------------------------------------
+
     try {
-        const neueDaten = req.body
-        // const errors = validationResult(req)
-        // if (!errors.isEmpty()) {
-        //     return res.status(422).json({
-        //         fehlerBeiValidierung: errors.array()
-        //     })
-        // }
+      const neueDaten = {
+        vorname: req.body.vorname,
+        password: req.body.password,
+        email: req.body.email,
         
-        let schonVorhandenUser = await userModell.find({ email: neueDaten.email })
-		if (schonVorhandenUser.length >= 1) {
-			return res.status(409).send('Es gib schon einen Nutzer mit dieser Email')
-		}
-
-		let passwortGehashed = await bcrypt.hash(neueDaten.password, 10)
-        let erstelleNutzer = await userModell.create({ ...neueDaten, password: passwortGehashed })
-		res.status(201).render('angemeldet',erstelleNutzer);
-
+      };
+      const fehler = validator.validationResult(req);
+      if (!fehler.isEmpty()) {
+        console.log(fehler.array());
+        const meldungen = fehler.array().map((einPrüfergebnis) => {
+          return einPrüfergebnis.msg;
+        })
+        neueDaten.fehler = meldungen;
+        res.render('anmeldenserverout',neueDaten );
+      }
+      
+      let schonVorhandenUser = await userModell.find({ email: neueDaten.email })
+      if (schonVorhandenUser.length >= 1) {
+        return res.status(409).send('Es gib schon einen Nutzer mit dieser Email')
+      }
+      let passwortGehashed = await bcrypt.hash(neueDaten.password, 10)
+      let erstelleNutzer = await userModell.create({ ...neueDaten,bild: req.file.filename, password: passwortGehashed })
+      res.status(201).render('angemeldet', { vorname: erstelleNutzer.vorname, email: erstelleNutzer.email, bild: "/" + erstelleNutzer.bild });
     } catch (fehler) {
-        // next(fehler)
-        res.render('fehler',fehler)
+  console.log("fehler=",fehler)
+      res.render('fehler', fehler)
     }
-};
+  }
+
 
 //USER GET LOGIIN ******************************
 const userGet_Einloggen = (req, res, next) => {
-    res.status(200).render('login')
+    res.status(200).render('login',{csrfTocken:req.csrfToken()})
 };
 // *****************************************
 

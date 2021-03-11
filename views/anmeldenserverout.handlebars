@@ -1,0 +1,42 @@
+
+<h1>Nutzeruser Daten!</h1>
+{{#if fehler}}
+<p>Deine Eingaben waren Fehlerhaft!</p>
+    <ul>
+        {{#each fehler}}
+        <li>{{this}}</li>
+        {{/each}}
+    </ul>
+{{/if}}
+
+
+<div class="container mt-5">
+        <form action="/users" method="POST" enctype="multipart/form-data">
+         <input type="text" name="_csrf" value="{{csrfTocken}}">
+            <div class="form-group col-md-6">
+                <label for="vorname"></label>
+                <input type="text" class="form-control" id="vorname" name="vorname" placeholder="Vorname *" value="{{vorname}}">
+            </div>
+
+    
+            <div class="form-group col-md-6">
+                <label for="email"></label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email *" required value="{{email}}">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="password"></label>
+                <input type="text" class="form-control" id="password" name="password" placeholder="Password *" minlength="5" maxlength="10" required value="{{password}}">
+            </div>
+
+
+            <label> Bild:
+                <input type="file" name="bild">
+            </label>
+
+            <button type="submit" class="btn btn-primary mt-3">Sign in</button>
+            <button type="reset" class="btn btn-primary mt-3">Reset</button>
+        </form>
+    </div>
+
+

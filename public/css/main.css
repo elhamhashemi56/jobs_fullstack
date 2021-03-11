@@ -25,3 +25,14 @@
 .navbar_items a:hover{
     color:sandybrown;
 }
+
+.container2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 600px;
+    border: 5px double gray;
+    background-color:rgb(228, 226, 226) ;
+    margin-left: 20px;
+}
